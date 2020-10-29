@@ -4,17 +4,17 @@ import java.util.Random;
 
 public abstract class Car {
 
-    protected int percent;
+    protected int percentS;
 
-    public void tryCapacity() {
+    public void tryCapacityS() {
         int randomNumber = Main.random.nextInt(101);
-        if (randomNumber < percent) {
+        if (randomNumber < percentS) {
             capacity();
 
         }
     }
 
     protected abstract void capacity();
-}
 
+}
 
