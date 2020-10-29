@@ -4,11 +4,10 @@ public abstract class Car {
 
     protected int percent;
 
-    public void tryCapacityS() {
+    public void tryCapacity() {
         int randomNumber = Main.random.nextInt(101);
         if (randomNumber < percent) {
             capacity();
-
         }
     }
 

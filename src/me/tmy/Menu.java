@@ -1,5 +1,6 @@
 package me.tmy;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import org.fusesource.jansi.Ansi;
@@ -47,11 +48,26 @@ public class Menu {
         return colors[choix];
 
     }
+
     static public int gameOver(){
         System.out.println("Vous avez perdu la partie, Voulez vous recommencer?\n" +
                 "1-OUI\n" +
                 "2-Non");
          return getIntInput(2);
+    }
+
+    public static void clearConsole() {
+        if (System.getProperty("os.name").startsWith("Windows")){
+            try {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        }
     }
 
 }

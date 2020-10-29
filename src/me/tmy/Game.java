@@ -1,15 +1,19 @@
 package me.tmy;
 
+import org.fusesource.jansi.Ansi;
+
 public class Game {
 
     private static final long TIME_BETWEEN_STEPS = 2000;
 
-    Car car;
+    private Car car;
 
-    int mode; // 1: slow 2: fast
+    private final int mode; // 1: slow 2: fast
+    private final Ansi.Color color;
 
-    public Game(int mode) {
+    public Game(int mode, Ansi.Color color) {
         this.mode = mode;
+        this.color = color;
     }
 
     public void start() {
@@ -26,18 +30,18 @@ public class Game {
     }
 
     public void step() {
-        System.out.println("step");
+        car.tryCapacity();
+//        Menu.clearConsole();
     }
 
     public static boolean checkAnswer(String check, String answer) {
         if (check == null) {
-            System.out.println("temps écoulé");
+            System.out.println("Temps écoulé");
             return false;
         } else if (answer.equals(check.toUpperCase())) {
             System.out.println("Bien joué");
             return true;
         } else {
-
             System.out.println("Perdu");
             return false;
         }
