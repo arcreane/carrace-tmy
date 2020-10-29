@@ -1,6 +1,8 @@
 package me.tmy;
 
 public class FastCar extends Car {
+    int motor;
+    int wheels[];
 
     private CarPart[]parts = new CarPart[5];
 
