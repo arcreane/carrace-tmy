@@ -12,7 +12,6 @@ public abstract class Car {
         }
     }
 
-    protected abstract void capacity();
-
+    public abstract void capacity();
 }
 

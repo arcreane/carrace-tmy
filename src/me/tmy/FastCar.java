@@ -6,7 +6,7 @@ public class FastCar extends Car {
 
 
     public FastCar() {
-        percent = 25;
+        percent = 35;
         parts[0] = new Engine();
         parts[1] = new Wheel(Wheel.Position.TOP_LEFT);
         parts[2] = new Wheel(Wheel.Position.TOP_RIGHT);
@@ -18,7 +18,7 @@ public class FastCar extends Car {
 
 
     @Override
-    protected void capacity() {
+    public void capacity() {
         int part = Main.random.nextInt(parts.length);
         parts[part].partBreak();
 

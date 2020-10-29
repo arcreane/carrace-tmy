@@ -12,7 +12,7 @@ public class Game {
         this.mode = mode;
     }
 
-    public void start(){
+    public void start() {
         car = mode == 1 ? new SlowCar() : new FastCar();
 
         do {
@@ -25,8 +25,24 @@ public class Game {
         } while (true);
     }
 
-    public void step(){
+    public void step() {
         System.out.println("step");
     }
 
+    public static boolean checkAnswer(String check, String answer) {
+        if (check == null) {
+            System.out.println("temps écoulé");
+            return false;
+        } else if (answer.equals(check.toUpperCase())) {
+            System.out.println("Bien joué");
+            return true;
+        } else {
+
+            System.out.println("Perdu");
+            return false;
+        }
+
+    }
+
 }
+

@@ -13,7 +13,11 @@ public class Engine extends CarPart {
             builder.append(randomNumbers[i]).append(" ");
 
         }
-        System.out.println(builder.toString());
+        String sequence = builder.toString().trim();
+        System.out.println(sequence);
+        String input = InputManager.getInput(4);
+
+        boolean result = Game.checkAnswer(input,sequence);
 
     }
 }
