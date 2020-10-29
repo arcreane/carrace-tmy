@@ -1,6 +1,8 @@
 package me.tmy;
 
+
 import org.fusesource.jansi.Ansi;
+
 
 import java.util.Random;
 
@@ -14,5 +16,9 @@ public class Main {
         System.out.println(color);
         new RefreshConsole();
         Menu.gameOver();
+        System.out.println("Hi!");
+        System.out.println(classeTemporaire.shuffle("VITESSE"));
+
     }
 }
+
