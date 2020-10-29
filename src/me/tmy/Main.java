@@ -1,9 +1,18 @@
 package me.tmy;
 
-public class Main {
+import org.fusesource.jansi.Ansi;
 
-    public static void main(String[] args)
-    {
-          new Menu();
+import java.util.Random;
+
+public class Main {
+    public static final Random random = new Random();
+
+    public static void main(String[] args) {
+        int mode = Menu.titleScreen();
+        new RefreshConsole();
+        Ansi.Color color = Menu.askColor();
+        System.out.println(color);
+        new RefreshConsole();
+        Menu.gameOver();
     }
 }
