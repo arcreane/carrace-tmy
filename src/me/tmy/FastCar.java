@@ -1,26 +1,27 @@
 package me.tmy;
 
-import java.util.StringJoiner;
-
 public class FastCar extends Car {
 
+    private CarPart[]parts = new CarPart[5];
+
+
     public FastCar() {
-        percentS = 25;
+        percent = 25;
+        parts[0] = new Engine();
+        parts[1] = new Wheel(Wheel.Position.TOP_LEFT);
+        parts[2] = new Wheel(Wheel.Position.TOP_RIGHT);
+        parts[3] = new Wheel(Wheel.Position.BOTTOM_LEFT);
+        parts[4] = new Wheel(Wheel.Position.BOTTOM_RIGHT);
+
     }
+
+
 
     @Override
-    protected void capacity(){
-        StringBuilder builder = new StringBuilder();
-
-        int[]randomNumbers = new int[5];
-        for (int i = 0; i < randomNumbers.length; i++) {
-            randomNumbers[i] = Main.random.nextInt(10);
-            builder.append(randomNumbers[i]).append(" ");
-
-        }
-        System.out.println(builder.toString());
+    protected void capacity() {
+        int part = Main.random.nextInt(parts.length);
+        parts[part].partBreak();
 
     }
-
 
 }
