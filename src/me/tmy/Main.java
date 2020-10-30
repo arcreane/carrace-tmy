@@ -12,9 +12,13 @@ public class Main {
     public static final Random random = new Random();
 
     public static void main(String[] args) {
+        new AudioClip("gentlemen_start_your_engines").play();
+
         Menu.clearConsole();
         System.out.println(ansi().fgBrightYellow().a(loadAsciiFile("title")));
         System.out.println(ansi().fg(Ansi.Color.CYAN).a(loadAsciiFile("car")).reset());
+
+        Menu.pressEnter();
 
         do{
             int mode = Menu.titleScreen();

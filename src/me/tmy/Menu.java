@@ -1,24 +1,26 @@
 package me.tmy;
 
-import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
 import org.fusesource.jansi.Ansi;
+
+import java.io.IOException;
+import java.util.Scanner;
 
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Menu {
+    static private final AudioClip modeSelectSound = new AudioClip("mode_select");
+    static private final AudioClip selectVehiculeSound = new AudioClip("select_your_vehicle");
 
     static public int titleScreen(){
+        modeSelectSound.play();
         System.out.println("*****Welcome to this race*****");
         System.out.println("Choose your car ");
-        System.out.println("1->Slow car (50% chance to have speed boost.txt");
-        System.out.println("2-Fast car(30% chance to break down )");
+        System.out.println("1-> Slow car (25% chance to have speed boost)");
+        System.out.println("2-> Fast car(35% chance to break down )");
         return getIntInput(2);
     }
 
-
-    static public int  getIntInput(int max){
+    static public int getIntInput(int max){
         Scanner scanner = new Scanner(System.in);
         try {
             int choice = scanner.nextInt();
@@ -36,11 +38,12 @@ public class Menu {
     }
 
     static public Ansi.Color askColor(){
+        selectVehiculeSound.play();
         Ansi.Color [] colors = Ansi.Color.values();
         for(int i = 0; i<colors.length - 1; i++ ){
             System.out.println(ansi().fg(colors[i]).a((i + 1) + "-" + colors[i].name() + " Car"));
         }
-        System.out.println(ansi().fg(Ansi.Color.BLACK).a("9-").fg(Ansi.Color.BLUE).a("Voi").fg(Ansi.Color.WHITE).a("tu").fg(Ansi.Color.WHITE).a("re").a(" ").fg(Ansi.Color.RED).a("a").fg(Ansi.Color.MAGENTA).a("léa").fg(Ansi.Color.GREEN).a("toi").fg(Ansi.Color.YELLOW).a("re").reset());
+        System.out.println(ansi().fg(Ansi.Color.RED).a("9-").fg(Ansi.Color.CYAN).a("Ran").fg(Ansi.Color.WHITE).a("dom").fg(Ansi.Color.YELLOW).a(" ca").fg(Ansi.Color.GREEN).a("r").reset());
         int choix = getIntInput(9);
         if (choix==9){
             choix = Main.random.nextInt(colors.length);
@@ -54,6 +57,11 @@ public class Menu {
                 "1-YES\n" +
                 "2-NO");
          return getIntInput(2) == 1;
+    }
+
+    static public void pressEnter() {
+        System.out.println("Press enter to continue");
+        new Scanner(System.in).nextLine();
     }
 
     public static void clearConsole() {

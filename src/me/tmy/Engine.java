@@ -4,7 +4,8 @@ public class Engine extends CarPart {
 
 
     @Override
-    public void partBreak() {
+    public int partBreak() {
+        int penality = 0;
         boolean result = false;
 
         System.out.println("\nYour engine has just broken down!\n" +
@@ -24,6 +25,9 @@ public class Engine extends CarPart {
             String input = InputManager.getInput(4);
 
             result = Game.checkAnswer(input,sequence);
+            penality++;
         }
+
+        return penality;
     }
 }

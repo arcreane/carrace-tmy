@@ -3,9 +3,12 @@ package me.tmy;
 import org.fusesource.jansi.Ansi;
 
 public abstract class Car {
+    private static final AudioClip hurryUpSound = new AudioClip("hurry_up");
 
     protected int percent;
     protected float speed;
+
+    protected boolean capacityActive;
 
     protected final Ansi.Color color;
 
@@ -17,14 +20,20 @@ public abstract class Car {
         return speed;
     }
 
-    public void tryCapacity() {
+    public int tryCapacity() {
+        if(capacityActive)
+            return 0;
+
         int randomNumber = Main.random.nextInt(101);
         if (randomNumber < percent) {
-            capacity();
+            hurryUpSound.play();
+            return capacity();
         }
+
+        return 0;
     }
 
-    public abstract void capacity();
+    public abstract int capacity();
 
     public void step() {} // Pas abstract car elle est facultative
 

@@ -16,7 +16,8 @@ public class Wheel extends CarPart {
     }
 
     @Override
-    public void partBreak() {
+    public int partBreak() {
+        int penality = 0;
         boolean result = false;
 
         System.out.println("\nYour " + position.name().toLowerCase().replace('_', ' ') + " tire has just burst!\n" +
@@ -26,7 +27,10 @@ public class Wheel extends CarPart {
             System.out.println(sequence);
             String input = InputManager.getInput(4);
             result = Game.checkAnswer(input , sequence);
+            penality++;
         }
+
+        return penality;
     }
 
     public enum Position{

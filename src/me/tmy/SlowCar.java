@@ -32,12 +32,9 @@ public class SlowCar extends Car {
     }
 
     @Override
-    public void capacity(){
+    public int capacity(){
         Menu.clearConsole();
         System.out.println(ansi().fg(color).a(boostAscii).reset());
-
-       if (counter > 0)
-           return;
 
         System.out.println("\nYour car is ready for a boost.txt!\n" +
                 "Type this sequence to use it:");
@@ -57,6 +54,8 @@ public class SlowCar extends Car {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        return 0;
     }
 
    @Override
