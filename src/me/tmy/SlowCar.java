@@ -5,6 +5,8 @@ import java.util.List;
 
 public class SlowCar extends Car {
 
+    int counter = -1;
+
     private static String shuffle(String input){
         List<Character> characters = new ArrayList<Character>();
         for(char c: input.toCharArray()){
@@ -30,9 +32,20 @@ public class SlowCar extends Car {
        String input = InputManager.getInput(5);
 
        boolean result = Game.checkAnswer(input,shuffle);
-
+       if (result) {
+           speed *=3;
+           counter = 4;
        }
-
+    }
+       @Override
+    public void step(){
+        if (counter > 0){
+            counter--;
+        }
+        else if (counter == 0){
+            speed /= 3;
+        }
+    }
 }
 
 

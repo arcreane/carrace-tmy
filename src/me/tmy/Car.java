@@ -18,6 +18,9 @@ public abstract class Car {
 
     public abstract void capacity();
 
+    public void step (){
+
+    }
 
 }
 
