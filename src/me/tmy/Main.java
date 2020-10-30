@@ -16,10 +16,13 @@ public class Main {
         System.out.println(ansi().fgBrightYellow().a(loadAsciiFile("title")));
         System.out.println(ansi().fg(Ansi.Color.CYAN).a(loadAsciiFile("car")).reset());
 
-        int mode = Menu.titleScreen();
-        var color = Menu.askColor();
+        do{
+            int mode = Menu.titleScreen();
+            var color = Menu.askColor();
 
-        new Game(mode, color).start();
+            new Game(mode, color).start();
+        } while (Menu.gameOver());
+
     }
 
     public static String loadAsciiFile(String name){
@@ -29,7 +32,9 @@ public class Main {
             return new String(data);
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+        } catch (NullPointerException e) {
+            System.out.println("Fichier " + name + ".txt");
         }
+        return null;
     }
 }

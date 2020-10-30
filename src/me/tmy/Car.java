@@ -3,9 +3,9 @@ package me.tmy;
 public abstract class Car {
 
     protected int percent;
-    protected int speed;
+    protected float speed;
 
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
@@ -18,9 +18,9 @@ public abstract class Car {
 
     public abstract void capacity();
 
-    public void step (){
+    public void step() {} // Pas abstract car elle est facultative
 
-    }
+    public void frame() {}
 
 }
 

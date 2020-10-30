@@ -2,69 +2,108 @@ package me.tmy;
 
 import org.fusesource.jansi.Ansi;
 
+import java.util.Scanner;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Game {
-    static String smallCarAscii = Main.loadAsciiFile("small-car");
-    static String whiteChar = "░", blackChar = "▓";
+    private static final String smallCarAscii = Main.loadAsciiFile("small-car");
+    private static final String completedAscii = Main.loadAsciiFile("completed");
+    private static final String whiteChar = "_", blackChar = "#";
 
-    private static final long TIME_BETWEEN_STEPS = 2000;
-    int nbtours;
-     private int progress;
+    private static final long TIME_BETWEEN_STEPS = 2;
+    private static final int TOTAL_LAPS = 5;
+    private static final float LAP_LENGTH = 10;
 
-    private Car car;
+    private int stepCount;
 
-    private final int mode; // 1: slow 2: fast
+    private int lapsCount;
+    private float progress;
+
+    private final Car car;
+
     private final Ansi.Color color;
 
-    private boolean visialCarPosition = true;
+    private boolean visialCarY = true;
 
-    private int getProgressionPervent() {
-        return 75;
+    private int getProgressionPercent() {
+        return (int) (progress / LAP_LENGTH * 100);
     }
 
     public Game(int mode, Ansi.Color color) {
-        this.mode = mode;
+        // 1: slow 2: fast
         this.color = color;
+        car = mode == 1 ? new SlowCar() : new FastCar();
     }
 
     public void start() {
-        car = mode == 1 ? new SlowCar() : new FastCar();
+        stepCount = 0;
+        Timer timer = new Timer(TIME_BETWEEN_STEPS);
+        timer.start();
 
-        do {
-            step();
-            try {
-                Thread.sleep(TIME_BETWEEN_STEPS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        try {
+            while (lapsCount < TOTAL_LAPS) {
+                frame();
+
+                if (timer.isOver()) {
+                    step();
+                    timer.start();
+                }
+
+                Thread.sleep(100);
             }
-        } while (true);
+
+            gameOver();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void step() {
-        String msg = ansi().fg(color).a(smallCarAscii).a('\n') +
-                blackChar.repeat(getProgressionPervent()) + whiteChar.repeat(100 - getProgressionPervent()) + ansi().a('\n').reset() +
-                "Progression: 0km       Tours 1/10";
+    private void frame(){
+        Menu.clearConsole();
+        System.out.println(
+                ansi().cursor(visialCarY ? 1 : 2, 1).fg(color).a(smallCarAscii).a('\n').reset().cursor(7, 0)
+                .a("  ").a(stepCount).a(" munites since the begining of the race.\n")
+                .a("     ").a(Math.round(progress)).a("km(s)       ").a(lapsCount).a('/').a(TOTAL_LAPS).a(" laps\n")
+                .a('[').a(blackChar.repeat(getProgressionPercent())).a(whiteChar.repeat(100 - getProgressionPercent()) + "]")
+        );
+        visialCarY = !visialCarY;
 
-        System.out.println(msg);
+        car.frame();
+    }
 
+    private void step() {
+        stepCount++;
         car.tryCapacity();
+
         progress += car.getSpeed();
         if (progress>10){
             progress = 0;
-            nbtours++;
+            lapsCount++;
         }
+
+        car.step();
+    }
+
+    private void gameOver() {
+        Menu.clearConsole();
+        System.out.println(
+                ansi().fg(color).a(completedAscii).reset()
+                .a("\nYou completed the race in ").a(stepCount).a(" minutes.")
+                .a("\nPress enter to continue.")
+        );
+        new Scanner(System.in).nextLine();
     }
 
     public static boolean checkAnswer(String check, String answer) {
         if (check == null) {
-            System.out.println("Temps écoulé");
+            System.out.println("Time out");
             return false;
         } else if (answer.equals(check.toUpperCase())) {
-            System.out.println("Bien joué");
+            System.out.println("Nice job");
             return true;
         } else {
-            System.out.println("Perdu");
+            System.out.println("Oops");
             return false;
         }
 

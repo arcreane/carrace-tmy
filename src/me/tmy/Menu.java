@@ -49,11 +49,11 @@ public class Menu {
 
     }
 
-    static public int gameOver(){
-        System.out.println("Vous avez perdu la partie, Voulez vous recommencer?\n" +
-                "1-OUI\n" +
-                "2-Non");
-         return getIntInput(2);
+    static public boolean gameOver(){
+        System.out.println("Play again?\n" +
+                "1-YES\n" +
+                "2-NO");
+         return getIntInput(2) == 1;
     }
 
     public static void clearConsole() {

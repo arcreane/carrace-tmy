@@ -1,11 +1,8 @@
 package me.tmy;
 
 public class FastCar extends Car {
-    
 
-    private CarPart[]parts = new CarPart[5];
-
-
+    private final CarPart[] parts = new CarPart[5];
 
     public FastCar() {
         percent = 35;
@@ -14,16 +11,13 @@ public class FastCar extends Car {
         parts[2] = new Wheel(Wheel.Position.TOP_RIGHT);
         parts[3] = new Wheel(Wheel.Position.BOTTOM_LEFT);
         parts[4] = new Wheel(Wheel.Position.BOTTOM_RIGHT);
-        speed = 100;
+        speed = 100f / 60f;
     }
-
-
 
     @Override
     public void capacity() {
         int part = Main.random.nextInt(parts.length);
         parts[part].partBreak();
-
     }
 
 }

@@ -1,7 +1,11 @@
 package me.tmy;
 
+import org.fusesource.jansi.Ansi;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 public class SlowCar extends Car {
 
@@ -22,13 +26,19 @@ public class SlowCar extends Car {
 
     public SlowCar() {
         percent = 25;
-        speed = 50;
+        speed = 50f / 60f;
     }
 
     @Override
     public void capacity(){
+       if (counter > 0)
+           return;
+
+        System.out.println("\nYour car is ready for a boost!\n" +
+                "Type this sequence to use it:");
+
        String shuffle = shuffle("VITESSE");
-        System.out.println(shuffle);
+       System.out.println(shuffle);
        String input = InputManager.getInput(5);
 
        boolean result = Game.checkAnswer(input,shuffle);
@@ -36,15 +46,29 @@ public class SlowCar extends Car {
            speed *=3;
            counter = 4;
        }
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-       @Override
+
+   @Override
     public void step(){
-        if (counter > 0){
+       if (counter > 0){
             counter--;
         }
-        else if (counter == 0){
+        if (counter == 0){
             speed /= 3;
+            counter = -1;
         }
+    }
+
+    @Override
+    public void frame() {
+        if (counter > 0)
+            System.out.println("Boost active!");
     }
 }
 

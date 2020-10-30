@@ -2,12 +2,11 @@ package me.tmy;
 
 public class Wheel extends CarPart {
 
-    private Position position;
-    private String sequence;
+    private final Position position;
+    private final String sequence;
 
     public Wheel(Position position) {
         this.position = position;
-
         sequence = switch(position){
             case TOP_LEFT -> "L U C D R";
             case TOP_RIGHT -> "L U R C L D R";
@@ -18,18 +17,22 @@ public class Wheel extends CarPart {
 
     @Override
     public void partBreak() {
-        System.out.println(sequence);
-        String input = InputManager.getInput(4);
-        boolean result = Game.checkAnswer(input , sequence);
+        boolean result = false;
 
+        System.out.println("\nYour " + position.name().toLowerCase().replace('_', ' ') + " tire has just burst!\n" +
+                "Type this sequence to change it:");
 
+        while (!result) {
+            System.out.println(sequence);
+            String input = InputManager.getInput(4);
+            result = Game.checkAnswer(input , sequence);
+        }
     }
 
     public enum Position{
         TOP_LEFT,
         TOP_RIGHT,
         BOTTOM_LEFT,
-        BOTTOM_RIGHT,
-
+        BOTTOM_RIGHT
     }
 }
