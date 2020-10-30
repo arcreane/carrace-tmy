@@ -45,7 +45,7 @@ public class Menu {
         if (choix==9){
             choix = Main.random.nextInt(colors.length);
         }
-        return colors[choix];
+        return colors[choix - 1];
 
     }
 

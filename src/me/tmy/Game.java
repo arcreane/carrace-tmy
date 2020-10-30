@@ -2,7 +2,11 @@ package me.tmy;
 
 import org.fusesource.jansi.Ansi;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 public class Game {
+    static String smallCarAscii = Main.loadAsciiFile("small-car");
+    static String whiteChar = "░", blackChar = "▓";
 
     private static final long TIME_BETWEEN_STEPS = 2000;
 
@@ -10,6 +14,12 @@ public class Game {
 
     private final int mode; // 1: slow 2: fast
     private final Ansi.Color color;
+
+    private boolean visialCarPosition = true;
+
+    private int getProgressionPervent() {
+        return 75;
+    }
 
     public Game(int mode, Ansi.Color color) {
         this.mode = mode;
@@ -30,6 +40,12 @@ public class Game {
     }
 
     public void step() {
+        String msg = ansi().fg(color).a(smallCarAscii).a('\n') +
+                blackChar.repeat(getProgressionPervent()) + whiteChar.repeat(100 - getProgressionPervent()) + ansi().a('\n').reset() +
+                "Progression: 0km       Tours 1/10";
+
+        System.out.println(msg);
+
         car.tryCapacity();
 //        Menu.clearConsole();
     }

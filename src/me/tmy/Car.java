@@ -13,6 +13,6 @@ public abstract class Car {
 
     public abstract void capacity();
 
-    protected int speed;
+    public void step () {} // pas abstract car elle n'est pas obligatoire
 }
 
