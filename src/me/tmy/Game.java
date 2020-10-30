@@ -9,6 +9,8 @@ public class Game {
     static String whiteChar = "░", blackChar = "▓";
 
     private static final long TIME_BETWEEN_STEPS = 2000;
+    int nbtours;
+     private int progress;
 
     private Car car;
 
@@ -47,7 +49,11 @@ public class Game {
         System.out.println(msg);
 
         car.tryCapacity();
-//        Menu.clearConsole();
+        progress += car.getSpeed();
+        if (progress>10){
+            progress = 0;
+            nbtours++;
+        }
     }
 
     public static boolean checkAnswer(String check, String answer) {
