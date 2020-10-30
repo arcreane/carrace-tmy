@@ -7,7 +7,9 @@ public class FastCar extends Car {
     private CarPart[]parts = new CarPart[5];
 
 
+
     public FastCar() {
+        speed = 100;
         percent = 35;
         parts[0] = new Engine();
         parts[1] = new Wheel(Wheel.Position.TOP_LEFT);

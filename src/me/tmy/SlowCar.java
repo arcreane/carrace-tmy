@@ -4,6 +4,7 @@ public class SlowCar extends Car {
 
     public SlowCar() {
         percent = 25;
+        speed = 50;
     }
 
     @Override
@@ -15,6 +16,7 @@ public class SlowCar extends Car {
        boolean result = Game.checkAnswer(input,shuffle);
 
        }
+
 }
 
 

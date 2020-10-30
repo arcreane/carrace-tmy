@@ -12,5 +12,7 @@ public abstract class Car {
     }
 
     public abstract void capacity();
+
+    protected int speed;
 }
 
