@@ -33,7 +33,7 @@ public class Game {
     public Game(int mode, Ansi.Color color) {
         // 1: slow 2: fast
         this.color = color;
-        car = mode == 1 ? new SlowCar() : new FastCar();
+        car = mode == 1 ? new SlowCar(color) : new FastCar(color);
     }
 
     public void start() {

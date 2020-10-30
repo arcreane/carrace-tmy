@@ -8,6 +8,7 @@ import java.util.List;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class SlowCar extends Car {
+    private final String boostAscii = Main.loadAsciiFile("boost");
 
     int counter = -1;
 
@@ -24,17 +25,21 @@ public class SlowCar extends Car {
         return output.toString();
     }
 
-    public SlowCar() {
+    public SlowCar(Ansi.Color color) {
+        super(color);
         percent = 25;
         speed = 50f / 60f;
     }
 
     @Override
     public void capacity(){
+        Menu.clearConsole();
+        System.out.println(ansi().fg(color).a(boostAscii).reset());
+
        if (counter > 0)
            return;
 
-        System.out.println("\nYour car is ready for a boost!\n" +
+        System.out.println("\nYour car is ready for a boost.txt!\n" +
                 "Type this sequence to use it:");
 
        String shuffle = shuffle("VITESSE");

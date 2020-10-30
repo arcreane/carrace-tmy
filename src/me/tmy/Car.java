@@ -1,9 +1,17 @@
 package me.tmy;
 
+import org.fusesource.jansi.Ansi;
+
 public abstract class Car {
 
     protected int percent;
     protected float speed;
+
+    protected final Ansi.Color color;
+
+    public Car(Ansi.Color color) {
+        this.color = color;
+    }
 
     public float getSpeed() {
         return speed;

@@ -12,7 +12,7 @@ public class Menu {
     static public int titleScreen(){
         System.out.println("*****Welcome to this race*****");
         System.out.println("Choose your car ");
-        System.out.println("1->Slow car (50% chance to have speed boost");
+        System.out.println("1->Slow car (50% chance to have speed boost.txt");
         System.out.println("2-Fast car(30% chance to break down )");
         return getIntInput(2);
     }
