@@ -3,6 +3,7 @@ package me.tmy;
 public abstract class Car {
 
     protected int percent;
+    protected int speed;
 
     public void tryCapacity() {
         int randomNumber = Main.random.nextInt(101);
@@ -13,6 +14,6 @@ public abstract class Car {
 
     public abstract void capacity();
 
-    protected int speed;
+
 }
 
