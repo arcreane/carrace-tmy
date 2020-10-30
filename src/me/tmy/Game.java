@@ -3,8 +3,9 @@ package me.tmy;
 import org.fusesource.jansi.Ansi;
 
 public class Game {
-
     private static final long TIME_BETWEEN_STEPS = 2000;
+    int nbtours;
+     private int progress;
 
     private Car car;
 
@@ -29,8 +30,12 @@ public class Game {
         } while (true);
     }
 
-    public void step() {
-        car.tryCapacity();
+    public void step()  {
+        progress += car.getSpeed();
+        if (progress>10){
+            progress = 0;
+            nbtours++;
+        }
 //        Menu.clearConsole();
     }
 

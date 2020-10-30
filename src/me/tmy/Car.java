@@ -5,6 +5,10 @@ public abstract class Car {
     protected int percent;
     protected int speed;
 
+    public int getSpeed() {
+        return speed;
+    }
+
     public void tryCapacity() {
         int randomNumber = Main.random.nextInt(101);
         if (randomNumber < percent) {
